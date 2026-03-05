@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "gulp": "^4.0.1"
+  },
+  "dependencies": {
+    "eslint": "^10.0.2"
   }
 }
