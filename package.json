@@ -10,16 +10,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-<<<<<<< HEAD
-    "eslint": "^10.1.0",
-    "gulp": "^5.0.1",
-    "stylelint": "^17.6.0"
-=======
     "@eslint/js": "^10.0.1",
-    "eslint": "^10.1.0",
+    "eslint": "^8.57.0",
     "globals": "^17.4.0",
     "gulp": "^5.0.1",
     "typescript-eslint": "^8.58.0"
->>>>>>> e940165 (Added eslint config)
   }
 }
