@@ -11,25 +11,25 @@ reload = browserSync.reload;
 
 
 let compressHTML = () => {
-    return src(['assignment-2--intro-to-internet-programming--cs-275--spring-2026/*.html'])
+    return src(['*.html'])
         .pipe(htmlCompressor({ collapseWhitespace: true }))
         .pipe(dest('prod'));
 };
 
 let compileCSSForDev = () => {
-    return src('assignment-2--intro-to-internet-programming--cs-275--spring-2026/styles/main.css')
+    return src('styles/main.css')
         .pipe(sass.sync({ style: 'expanded', precision: 10 }).on('error', sass.logError))
         .pipe(dest('temp/styles'));
 };
 
 let compileCSSForProd = () => {
-    return src('assignment-2--intro-to-internet-programming--cs-275--spring-2026/styles/main.css')
+    return src('styles/main.css')
         .pipe(sass.sync({ style: 'compressed', precision: 10 }).on('error', sass.logError))
         .pipe(dest('prod/styles'));
 };
 
 let lintCSS = () => {
-    return src('assignment-2--intro-to-internet-programming--cs-275--spring-2026/styles/*.css')
+    return src('styles/*.css')
         .pipe(cssLinter({
             failAfterError: false,
             reporters: [{ formatter: 'string', console: true }]
@@ -37,19 +37,19 @@ let lintCSS = () => {
 };
 
 let lintJS = () => {
-    return src('assignment-2--intro-to-internet-programming--cs-275--spring-2026/js/*.js','assignment-2--intro-to-internet-programming--cs-275--spring-2026/*.js')
+    return src('js/*.js','*.js')
         .pipe(jsLinter())
         .pipe(jsLinter.formatEach('compact'));
 };
 
 let transpileJSForDev = () => {
-    return src('assignment-2--intro-to-internet-programming--cs-275--spring-2026/js/*.js')
+    return src('js/*.js')
         .pipe(babel())
         .pipe(dest('temp/scripts'));
 };
 
 let transpileJSForProd = () => {
-    return src('assignment-2--intro-to-internet-programming--cs-275--spring-2026/js/*.js')
+    return src('js/*.js')
         .pipe(babel())
         .pipe(jsCompressor())
         .pipe(dest('prod/scripts'));
@@ -57,13 +57,13 @@ let transpileJSForProd = () => {
 
 let copyUnprocessedAssetsForProd = () => {
     return src([
-        'assignment-2--intro-to-internet-programming--cs-275--spring-2026/*.*',
-        'assignment-2--intro-to-internet-programming--cs-275--spring-2026/**',
-        '!assignment-2--intro-to-internet-programming--cs-275--spring-2026/*.html',
-        '!assignment-2--intro-to-internet-programming--cs-275--spring-2026/**/*.js',
-        '!assignment-2--intro-to-internet-programming--cs-275--spring-2026/styles/**',
-        '!assignment-2--intro-to-internet-programming--cs-275--spring-2026/img/',
-        '!assignment-2--intro-to-internet-programming--cs-275--spring-2026/img/.gitignore',
+        '*.*',
+        '**',
+        '!*.html',
+        '!**/*.js',
+        '!styles/**',
+        '!img/',
+        '!img/.gitignore',
 
     ], { dot: true })
     .pipe(dest('prod'));
@@ -78,10 +78,10 @@ let serve = () => {
         }
     });
 
-    watch('assignment-2--intro-to-internet-programming--cs-275--spring-2026/js/*.js', series(lintJS, transpileJSForDev)).on('change', reload);
-    watch('assignment-2--intro-to-internet-programming--cs-275--spring-2026/styles/*.css', compileCSSForDev).on('change', reload);
-    watch('assignment-2--intro-to-internet-programming--cs-275--spring-2026/*.html', compressHTML).on('change', reload);
-    watch('assignment-2--intro-to-internet-programming--cs-275--spring-2026/img/*').on('change', reload);
+    watch('js/*.js', series(lintJS, transpileJSForDev)).on('change', reload);
+    watch('styles/*.css', compileCSSForDev).on('change', reload);
+    watch('*.html', compressHTML).on('change', reload);
+    watch('img/*').on('change', reload);
 };
 
 async function clean() {
