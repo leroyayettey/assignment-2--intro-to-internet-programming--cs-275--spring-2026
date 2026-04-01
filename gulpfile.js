@@ -1,7 +1,7 @@
 const{ src, dest, series, watch} =  require('gulp'),
-cssLinter = require('gulp-stylelintrc'),
+cssLinter = require('gulp-stylelint'),
 {deleteAsync} = require('del'),
-babel = requre('gulp-babel')
+babel = require('gulp-babel')
 htmlCompressor = require('gulp-htmlmin'),
 jsCompressor = require('gulp-uglify'),
 jsLinter = require('gulp-eslint'),
