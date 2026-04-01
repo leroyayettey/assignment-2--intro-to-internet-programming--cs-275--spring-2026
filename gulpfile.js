@@ -1,7 +1,7 @@
 const{ src, dest, series, watch} =  require('gulp'),
 cssLinter = require('gulp-stylelint'),
 {deleteAsync} = require('del'),
-babel = require('gulp-babel')
+babel = require('gulp-babel'),
 htmlCompressor = require('gulp-htmlmin'),
 jsCompressor = require('gulp-uglify'),
 jsLinter = require('gulp-eslint'),
@@ -17,13 +17,13 @@ let compressHTML = () => {
 };
 
 let compileCSSForDev = () => {
-    return src('styles/main.css')
+    return src('styles/*.css')
         .pipe(sass.sync({ style: 'expanded', precision: 10 }).on('error', sass.logError))
         .pipe(dest('temp/styles'));
 };
 
 let compileCSSForProd = () => {
-    return src('styles/main.css')
+    return src('styles/*.css')
         .pipe(sass.sync({ style: 'compressed', precision: 10 }).on('error', sass.logError))
         .pipe(dest('prod/styles'));
 };
@@ -37,7 +37,7 @@ let lintCSS = () => {
 };
 
 let lintJS = () => {
-    return src('js/*.js','*.js')
+    return src('js/*.js')
         .pipe(jsLinter())
         .pipe(jsLinter.formatEach('compact'));
 };
@@ -45,26 +45,27 @@ let lintJS = () => {
 let transpileJSForDev = () => {
     return src('js/*.js')
         .pipe(babel())
-        .pipe(dest('temp/scripts'));
+        .pipe(dest('temp/js'));
 };
 
 let transpileJSForProd = () => {
     return src('js/*.js')
+        .on('data', file => console.log('Found JS file:', file.relative))
         .pipe(babel())
         .pipe(jsCompressor())
-        .pipe(dest('prod/scripts'));
+        .pipe(dest('prod/js'))
+        .on('end', () => console.log('JS transpiled to prod/js/'));
 };
 
 let copyUnprocessedAssetsForProd = () => {
     return src([
         '*.*',
         '**',
+        'img/**',
         '!*.html',
-        '!**/*.js',
         '!styles/**',
-        '!img/',
         '!img/.gitignore',
-
+        '!prod/**'
     ], { dot: true })
     .pipe(dest('prod'));
 };
@@ -74,7 +75,7 @@ let serve = () => {
         notify: true,
         reloadDelay: 50,
         server: {
-            baseDir: ['temp', 'assignment-2--intro-to-internet-programming--cs-275--spring-2026']
+            baseDir: ['temp', '.']
         }
     });
 
@@ -116,6 +117,7 @@ exports.serve = series(
     serve
 );
 exports.build = series(
+    clean,
     compressHTML,
     compileCSSForProd,
     transpileJSForProd,
