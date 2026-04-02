@@ -63,7 +63,9 @@ let copyUnprocessedAssetsForProd = () => {
         '!*.html',
         '!styles/**',
         '!img/.gitignore',
-        '!prod/**'
+        '!prod/**',
+        '!gulpfile.js',
+        '!node_modules/**'
     ], { dot: true })
     .pipe(dest('prod'));
 };
