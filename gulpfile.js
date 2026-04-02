@@ -5,9 +5,7 @@ babel = require('gulp-babel'),
 htmlCompressor = require('gulp-htmlmin'),
 jsCompressor = require('gulp-uglify'),
 jsLinter = require('gulp-eslint'),
-sass = require('gulp-sass')(require('sass')),
-browserSync = require('browser-sync'),
-reload = browserSync.reload;
+sass = require('gulp-sass')(require('sass'));
 
 
 let compressHTML = () => {
@@ -70,35 +68,9 @@ let copyUnprocessedAssetsForProd = () => {
     .pipe(dest('prod'));
 };
 
-let serve = () => {
-    browserSync({
-        notify: true,
-        reloadDelay: 50,
-        server: {
-            baseDir: ['temp', '.']
-        }
-    });
-
-    watch('js/*.js', series(lintJS, transpileJSForDev)).on('change', reload);
-    watch('styles/*.css', compileCSSForDev).on('change', reload);
-    watch('*.html', compressHTML).on('change', reload);
-    watch('img/*').on('change', reload);
-};
-
 async function clean() {
     const foldersToDelete = await deleteAsync(['./temp', 'prod']);
-    console.log('Deleted directories:', foldersToDelete);
-}
-
-async function listTasks() {
-    const exec = require('child_process').exec;
-    exec('gulp --tasks', function (error, stdout) {
-        if (error) {
-            console.log('Error listing tasks:', error);
-        } else {
-            console.log(`Available tasks:\n\n${stdout}`);
-        }
-    });
+    console.log('Deleted directories >>> ', foldersToDelete);
 }
 
 exports.compileCSSForDev = compileCSSForDev;
@@ -109,13 +81,13 @@ exports.compressHTML = compressHTML;
 exports.transpileJSForProd = transpileJSForProd;
 exports.copyUnprocessedAssetsForProd = copyUnprocessedAssetsForProd;
 exports.clean = clean;
-exports.default = listTasks;
-exports.serve = series(
-    compileCSSForDev,
+exports.default = series(
+    lintCSS,
     lintJS,
     transpileJSForDev,
-    serve
+    compileCSSForDev
 );
+
 exports.build = series(
     clean,
     compressHTML,

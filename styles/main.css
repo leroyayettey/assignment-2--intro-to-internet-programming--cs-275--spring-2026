@@ -9,9 +9,16 @@
 //
 // DON’T PROCEED UNTIL YOU’RE SURE STYLELINT AND EDITORCONFIG ARE WORKING RIGHT
 // -------------------------------------------------------------------------- */
-abcdef {
-     color: cs275
+p {
+    font-size: 16px;
 }
+
+h1 {
+    font-size: 2rem;
+    line-height: 1.1875;
+}
+
+
 
 
 
