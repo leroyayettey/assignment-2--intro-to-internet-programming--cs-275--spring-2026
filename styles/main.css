@@ -1,8 +1,63 @@
 p {
-    font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+a {
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
-    font-size: 2rem;
-    line-height: 1.1875;
+  font-size: 2rem;
+  line-height: 1.1875;
+  font-weight: 600;
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600
+}
+
+
+.carousel {
+  width: 640px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-slides {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.slide {
+  width: 640px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:default {
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
 }
