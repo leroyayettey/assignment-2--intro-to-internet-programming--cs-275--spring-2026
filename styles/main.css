@@ -34,28 +34,46 @@ h2 {
   transition: transform 0.3s ease;
 }
 
+.carousel-navigation {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right:0;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 10;
+}
+.carousel-navigation a {
+  pointer-events: auto;
+  display: block;
+  position: relative;
+  padding 10px
+}
+
+.carousel-navigation img {
+  width: 30px;
+  height: auto;
+  display: block;
+  cursor: pointer;
+}
+
 .slide {
   width: 640px;
-  padding: 0 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   box-sizing: border-box;
   flex-shrink: 0;
   text-align: center;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.slide img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
 
 :default {
   font-size: 16px;

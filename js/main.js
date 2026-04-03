@@ -1,5 +1,10 @@
 let body = document.querySelector('body');
 let carousel = document.querySelector('.carousel-slides');
+let previousArrow = document.querySelector('.carousel-navigation a:first-child');
+let nextArrow = document.querySelector('.carousel-navigation a:last-child');
+
+let currentAlbumSlideIndex = 0;
+let totalAlbumSlides = 0;
 
 let listOfAlbums = (data) => {
 
@@ -34,10 +39,61 @@ let listOfAlbums = (data) => {
         slide.appendChild(reviewParagraph);
 
         carousel.appendChild(slide);
+    }
+    totalAlbumSlides = data.length;
+    removeArrowVisiblity();
+}
 
+let removeArrowVisiblity = () => {
+    if (currentAlbumSlideIndex === 0){
+        previousArrow.style.display = 'none';
+    }
+    else{
+        previousArrow.style.display = 'block';
     }
 
+    if (currentAlbumSlideIndex === totalAlbumSlides - 1){
+        nextArrow.style.display = 'none';
+    }
+    else{
+        nextArrow.style.display = 'block';
+    }
+
+};
+
+let shiftAlbumCarousel = () => {
+    carousel.style.transform = `translateX(-${currentAlbumSlideIndex * 640}px)`;
+    removeArrowVisiblity();
 }
+
+nextArrow.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentAlbumSlideIndex < totalAlbumSlides - 1){
+        currentAlbumSlideIndex++;
+        shiftAlbumCarousel();
+    }
+    else{
+        removeArrowVisiblity();
+    }
+});
+
+previousArrow.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentAlbumSlideIndex > 0){
+        currentAlbumSlideIndex--;
+        shiftAlbumCarousel();
+    }
+    else{
+        removeArrowVisiblity();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') nextArrow.click();
+    if (e.key === 'ArrowLeft') previousArrow.click();
+});
+
+
 const script = document.createElement(`script`);
 script.setAttribute(`src`, `json/data.json`);
 document.body.appendChild(script);
