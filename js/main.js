@@ -1,8 +1,7 @@
 let body = document.querySelector('body');
+let carousel = document.querySelector('.carousel-slides');
 
-
-let cyclingAlbums = (data) => {
-    let carousel = document.querySelector('.carousel-slides');
+let listOfAlbums = (data) => {
 
     for (let i = 0; i < data.length; i++)
     {
@@ -23,16 +22,22 @@ let cyclingAlbums = (data) => {
         albumArtist.href = artistURL;
         albumArtist.target = '_blank';
         albumArtist.textContent = artistName;
+        slide.appendChild(albumArtist);
 
         let albumImg = document.createElement('img');
         albumImg.src = albumCover.path;
         albumImg.alt = albumCover.alt_content;
         slide.appendChild(albumImg);
 
+        let reviewParagraph = document.createElement('p');
+        reviewParagraph.textContent = albumReview;
+        slide.appendChild(reviewParagraph);
+
+        carousel.appendChild(slide);
+
     }
 
 }
-
 const script = document.createElement(`script`);
 script.setAttribute(`src`, `json/data.json`);
-carousel-slides.appendChild(script);
+document.body.appendChild(script);
