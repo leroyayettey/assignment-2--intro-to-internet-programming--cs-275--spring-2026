@@ -1,12 +1,20 @@
+body{
+  background-color: black;
+}
+
+
 p {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1.4;
+  color: white;
 }
 
 a {
   text-decoration: none;
   font-family: 'Open Sans', sans-serif;
+  color: white;
+
 }
 
 h1 {
@@ -14,11 +22,15 @@ h1 {
   line-height: 1.1875;
   font-weight: 600;
   text-align: center;
+  color: white;
+
 }
 
 h2 {
   font-family: 'Open Sans', sans-serif;
-  font-weight: 600
+  font-weight: 600;
+  color: white;
+
 }
 
 
