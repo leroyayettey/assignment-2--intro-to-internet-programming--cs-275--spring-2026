@@ -14,7 +14,7 @@
     "del": "^8.0.1",
     "eslint": "^8.57.0",
     "globals": "^17.4.0",
-    "gulp": "^5.0.1",
+    "gulp": "^4.0.1",
     "gulp-babel": "^8.0.0",
     "gulp-eslint": "^6.0.0",
     "gulp-htmlmin": "^5.0.1",
