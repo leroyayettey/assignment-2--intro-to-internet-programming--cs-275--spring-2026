@@ -14,7 +14,9 @@ let listOfAlbums = (data) => {
         let artistURL = data[i].url;
         let albumName = data[i].album;
         let albumCover = data[i].cover_image;
+        let albumCreditReference = data[i].cover_image.credit;
         let albumReview = data[i].review.content;
+        let albumReviewReference = data[i].review.source;
 
         let slide = document.createElement('div');
         slide.classList.add('slide');
@@ -34,9 +36,19 @@ let listOfAlbums = (data) => {
         albumImg.alt = albumCover.alt_content;
         slide.appendChild(albumImg);
 
+        let albumCredit = document.createElement('a');
+        albumCredit.href = data[i].cover_image.url;
+        albumCredit.textContent = "Credit: " + albumCreditReference;
+        slide.appendChild(albumCredit);
+
         let reviewParagraph = document.createElement('p');
         reviewParagraph.textContent = albumReview;
         slide.appendChild(reviewParagraph);
+
+        let albumReviewSource = document.createElement('a');
+        albumReviewSource.href = data[i].review.url;
+        albumReviewSource.textContent = "- " + albumReviewReference;
+        slide.appendChild(albumReviewSource);
 
         carousel.appendChild(slide);
     }
@@ -92,7 +104,6 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') nextArrow.click();
     if (e.key === 'ArrowLeft') previousArrow.click();
 });
-
 
 const script = document.createElement(`script`);
 script.setAttribute(`src`, `json/data.json`);
