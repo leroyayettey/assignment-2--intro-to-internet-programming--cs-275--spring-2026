@@ -1,4 +1,4 @@
-body{
+body {
   background-color: black;
 }
 
@@ -13,7 +13,6 @@ a {
   text-decoration: none;
   font-family: 'Open Sans', sans-serif;
   color: white;
-
 }
 
 h1 {
@@ -22,14 +21,12 @@ h1 {
   font-weight: 600;
   text-align: center;
   color: white;
-
 }
 
 h2 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   color: white;
-
 }
 
 .carousel {
@@ -41,14 +38,14 @@ h2 {
 
 .carousel-slides {
   display: flex;
-  transition: transform 0.3s ease;
+  transition: transform .3s ease;
 }
 
 .carousel-navigation {
   position: absolute;
   top: 50%;
   left: 0;
-  right:0;
+  right: 0;
   width: 100%;
   transform: translateY(-50%);
   display: flex;
@@ -56,6 +53,7 @@ h2 {
   pointer-events: none;
   z-index: 10;
 }
+
 .carousel-navigation a {
   pointer-events: auto;
   display: block;

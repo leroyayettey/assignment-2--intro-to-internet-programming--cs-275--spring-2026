@@ -1,7 +1,7 @@
-let body = document.querySelector('body');
-let carousel = document.querySelector('.carousel-slides');
-let previousArrow = document.querySelector('.carousel-navigation a:first-child');
-let nextArrow = document.querySelector('.carousel-navigation a:last-child');
+let body = document.querySelector(`body`);
+let carousel = document.querySelector(`.carousel-slides`);
+let previousArrow = document.querySelector(`.carousel-navigation a:first-child`);
+let nextArrow = document.querySelector(`.carousel-navigation a:last-child`);
 
 let currentAlbumSlideIndex = 0;
 let totalAlbumSlides = 0;
@@ -19,15 +19,15 @@ let listOfAlbums = (data) => {
         let albumReviewReference = data[i].review.source;
 
         let slide = document.createElement('div');
-        slide.classList.add('slide');
+        slide.classList.add(`slide`);
 
         let albumTitle = document.createElement('h2');
         albumTitle.textContent = `${albumName}`;
-        slide.appendChild(albumTitle)
+        slide.appendChild(albumTitle);
 
-        let albumArtist = document.createElement('a')
+        let albumArtist = document.createElement(`a`);
         albumArtist.href = artistURL;
-        albumArtist.target = '_blank';
+        albumArtist.target = `_blank`;
         albumArtist.textContent = artistName;
         slide.appendChild(albumArtist);
 
@@ -38,7 +38,7 @@ let listOfAlbums = (data) => {
 
         let albumCredit = document.createElement('a');
         albumCredit.href = data[i].cover_image.url;
-        albumCredit.textContent = "Credit -> " + albumCreditReference;
+        albumCredit.textContent = `Credit -> ` + albumCreditReference;
         slide.appendChild(albumCredit);
 
         let reviewParagraph = document.createElement('p');
@@ -47,7 +47,7 @@ let listOfAlbums = (data) => {
 
         let albumReviewSource = document.createElement('a');
         albumReviewSource.href = data[i].review.url;
-        albumReviewSource.textContent = "— " + albumReviewReference;
+        albumReviewSource.textContent = `— ` + albumReviewReference;
         slide.appendChild(albumReviewSource);
 
         carousel.appendChild(slide);
@@ -58,17 +58,17 @@ let listOfAlbums = (data) => {
 
 let removeArrowVisiblity = () => {
     if (currentAlbumSlideIndex === 0){
-        previousArrow.style.display = 'none';
+        previousArrow.style.display = `none`;
     }
     else{
-        previousArrow.style.display = 'block';
+        previousArrow.style.display = `block`;
     }
 
     if (currentAlbumSlideIndex === totalAlbumSlides - 1){
-        nextArrow.style.display = 'none';
+        nextArrow.style.display = `none`;
     }
     else{
-        nextArrow.style.display = 'block';
+        nextArrow.style.display = `block`;
     }
 
 };
@@ -78,7 +78,7 @@ let shiftAlbumCarousel = () => {
     removeArrowVisiblity();
 }
 
-nextArrow.addEventListener('click', (e) => {
+nextArrow.addEventListener(`click`, (e) => {
     e.preventDefault();
     if (currentAlbumSlideIndex < totalAlbumSlides - 1){
         currentAlbumSlideIndex++;
@@ -89,7 +89,7 @@ nextArrow.addEventListener('click', (e) => {
     }
 });
 
-previousArrow.addEventListener('click', (e) => {
+previousArrow.addEventListener(`click`, (e) => {
     e.preventDefault();
     if (currentAlbumSlideIndex > 0){
         currentAlbumSlideIndex--;
@@ -101,8 +101,8 @@ previousArrow.addEventListener('click', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') nextArrow.click();
-    if (e.key === 'ArrowLeft') previousArrow.click();
+    if (e.key === `ArrowRight`) nextArrow.click();
+    if (e.key === `ArrowLeft`) previousArrow.click();
 });
 
 const script = document.createElement(`script`);
