@@ -38,7 +38,7 @@ let listOfAlbums = (data) => {
 
         let albumCredit = document.createElement('a');
         albumCredit.href = data[i].cover_image.url;
-        albumCredit.textContent = "Credit: " + albumCreditReference;
+        albumCredit.textContent = "Credit -> " + albumCreditReference;
         slide.appendChild(albumCredit);
 
         let reviewParagraph = document.createElement('p');
@@ -47,7 +47,7 @@ let listOfAlbums = (data) => {
 
         let albumReviewSource = document.createElement('a');
         albumReviewSource.href = data[i].review.url;
-        albumReviewSource.textContent = "- " + albumReviewReference;
+        albumReviewSource.textContent = "— " + albumReviewReference;
         slide.appendChild(albumReviewSource);
 
         carousel.appendChild(slide);
